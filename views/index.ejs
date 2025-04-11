@@ -23,6 +23,9 @@
           name="movie"
           placeholder="Your favorite movie"
           required
+          pattern="[A-Za-z\s]+"
+          title="Movie name must contain only letters and spaces."
+          required
         />
         <label for="rating">Rating: </label>
         <input
@@ -35,5 +38,14 @@
         <button type="submit">Submit</button>
       </form>
     </div>
+
+    <h1>Submitted Movies</h1>
+    <ul>
+      <% movies.forEach(function(movieObj) { %>
+      <li>
+        <strong><%= movieObj.movie %></strong> - Rating: <%= movieObj.rating %>
+      </li>
+      <% }); %>
+    </ul>
   </body>
 </html>

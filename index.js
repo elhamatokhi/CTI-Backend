@@ -7,20 +7,23 @@ const PORT = 3000;
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
+let movies = [];
 
 app.post("/submit", (req, res) => {
   const { movie, rating } = req.body;
 
-  console.log(req.body);
-  try {
-    res.render("success.ejs", { movie: movie, rating: rating });
-  } catch (error) {
-    res.status(500).send(`<h3>Sever is not responding</h3>`);
+  movies.push({ movie, rating });
+  if (!movie || !rating) {
+    return res.status(400).send("<h3>Movie name and rating are required!</h3>");
   }
+
+  res.render("success.ejs", { movie, rating });
 });
+
+app.get("/", (req, res) => {
+  res.render("index.ejs", { movies });
+});
+
 app.listen(PORT, () => {
-  console.log(`The server is listening on port ${PORT}`);
+  console.log(`The Server is listening on port ${PORT}`);
 });
