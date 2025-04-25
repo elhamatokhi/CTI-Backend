@@ -1,8 +1,0 @@
- <h1>Submitted Movies</h1>
-    <ul>
-      <% movies.forEach(function(movieObj) { %>
-      <li>
-        <strong><%= movieObj.movie %></strong> - Rating: <%= movieObj.rating %>
-      </li>
-      <% }); %>
-    </ul>
