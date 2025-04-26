@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Uploaded Images</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <div class="main_container">
+      <div class="gallery-container">
+        <% images.forEach(image => { %>
+        <img src="/uploads/<%= image %>" alt="Uploaded image" />
+        <% }); %>
+      </div>
+      <div class="link-container">
+        <a href="/">Upload a new Image</a>
+      </div>
+    </div>
+  </body>
+</html>

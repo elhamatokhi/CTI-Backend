@@ -1,0 +1,27 @@
+<!-- index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <div class="upload-container">
+      <h1>Upload Your Image</h1>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label class="custom-file-upload">
+          <input type="file" name="file" required />
+          Choose Image
+        </label>
+        <br />
+        <button type="submit">Upload</button>
+
+        <div>
+          <a href="/gallery" class="btn">Show image gallery</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
