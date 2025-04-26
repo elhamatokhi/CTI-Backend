@@ -1,6 +1,20 @@
-# Movie Rating Web App
+# Image Upload Project
 
-A simple web app where users can submit their favorite movies with a rating, and view all submitted movies. The app stores data in a movies.json file.
+This project allows users to upload images, view them in a gallery, and delete them if necessary. It uses **Express.js** for server-side logic and **Multer** for handling file uploads.
+
+## Multer
+
+[Multer](https://www.npmjs.com/package/multer) is a middleware for handling **multipart/form-data**, which is used for uploading files. It simplifies the process of receiving and storing files on the server.
+
+### Why Multer?
+
+I used **Multer** because it efficiently handles file uploads by:
+
+- Parsing incoming form data.
+- Saving uploaded files to the server.
+- Allowing for customization of storage location and file handling.
+
+In this project, Multer is used to upload images and store them in the **uploads** folder, making it easy to display them in the gallery and manage files.
 
 <!-- GETTING STARTED -->
 
