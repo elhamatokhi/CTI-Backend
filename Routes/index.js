@@ -39,4 +39,19 @@ router.get("/gallery", (req, res) => {
   });
 });
 
+// Delete
+
+router.post("/delete", (req, res) => {
+  const imageName = req.body.imageName; // get the image name from the form
+  const imagePath = path.join(uploadsPath, imageName); // full path to the image
+
+  fs.unlink(imagePath, (err) => {
+    if (err) {
+      console.error("Failed to delete image:", err);
+    }
+    res.redirect("/gallery"); // <- Notice the "/" before gallery
+    console.log("Deleting:", imagePath);
+  });
+});
+
 export default router;

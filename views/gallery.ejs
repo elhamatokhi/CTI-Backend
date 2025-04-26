@@ -6,10 +6,16 @@
     <link rel="stylesheet" href="CSS/style.css" />
   </head>
   <body>
-    <div class="main_container">
+    <div class="main_container_success">
       <div class="gallery-container">
         <% images.forEach(image => { %>
-        <img src="/uploads/<%= image %>" alt="Uploaded image" />
+        <div class="image-wrapper">
+          <img src="/uploads/<%= image %>" alt="Uploaded image" />
+          <form action="/delete" method="POST" class="delete-form">
+            <input type="hidden" name="imageName" value="<%= image %>" />
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </div>
         <% }); %>
       </div>
       <div class="link-container">
