@@ -49,7 +49,7 @@ npm install
 > To run install nodemon and run:
 
 ```bash
-npx nodemon index.js
+nodemon App.js
 ```
 
 ## Authors
