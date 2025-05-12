@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="home">
+      <form action="/uniAction" method="post">
+        <h1>Universities in Berlin</h1>
+        <button type="submit" value="HTW Berlin" name="choice">🏫 HTW</button>
+        <button type="submit" value="Hertie School" name="choice">
+          🏛️ Hertie
+        </button>
+        <button type="submit" value="Bard College Berlin" name="choice">
+          🎨 Bard Berlin
+        </button>
+        <button type="submit" value="Steinbeis University Berlin" name="choice">
+          📘 Steinbeis
+        </button>
+
+        <button
+          type="submit"
+          value="Technical University of Berlin"
+          name="choice"
+        >
+          🎓
+        </button>
+        <button type="submit" value="Free University of Berlin" name="choice">
+          🏫 Free
+        </button>
+
+        <button
+          type="submit"
+          value="Humboldt University of Berlin"
+          name="choice"
+        >
+          🌎 Humboldt
+        </button>
+        <button
+          type="submit"
+          value="Berlin University of the Arts"
+          name="choice"
+        >
+          🏫 Berlin
+        </button>
+        <button type="submit" value="Berlin Psychology School" name="choice">
+          🧠 Berlin
+        </button>
+        <button
+          type="submit"
+          value="Alice Salomon University of Applied Sciences"
+          name="choice"
+        >
+          🏫 Alice
+        </button>
+        <button
+          type="submit"
+          value="Beuth University of Applied Sciences Berlin"
+          name="choice"
+        >
+          🏫 Beuth
+        </button>
+        <button type="submit" value="ESMT Berlin" name="choice">
+          📊 ESMT Berlin
+        </button>
+        <button
+          type="submit"
+          value="SRH Berlin University of Applied Sciences"
+          name="choice"
+        >
+          🏫 SRH
+        </button>
+      </form>
+      <div>
+        <% if(locals.uni){ %>
+        <div class="uni">
+          <h2><%= locals.uni.name %></h2>
+          <p>
+            Location: <%= locals.uni.location.country %>, <%=
+            locals.uni.location.city %>
+          </p>
+          <h2>Programs Offered in English</h2>
+          <ul>
+            <% if(locals.uni.programs && locals.uni.programs.length> 0) {%> <%
+            locals.uni.programs.forEach(program => { %>
+
+            <li><%= program.degree %></li>
+            <ul>
+              <% program.specializations.forEach(spec => { %>
+              <li><%= spec %></li>
+              <% }) %>
+            </ul>
+            <% })%> <% } else{ %>
+            <li>No program offered in English</li>
+            <% } %>
+          </ul>
+
+          <% if(locals.uni.ranking){ %>
+          <p>
+            <strong>Ranking: </strong>
+            <br />
+            Global: <%= locals.uni.ranking.global%>
+            <br />
+            Local: <%= locals.uni.ranking.local%>
+          </p>
+          <% } %>
+
+          <a href="/download/<%= locals.uni.id %>">Download</a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

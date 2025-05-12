@@ -1,0 +1,295 @@
+[
+  {
+    "id": "TU-Berlin",
+    "name": "Technical University of Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Artificial Intelligence",
+          "Data Science",
+          "Software Engineering"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 150,
+      "local": 3
+    }
+  },
+  {
+    "id": "HU-Berlin",
+    "name": "Humboldt University of Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Research in Computer Science",
+          "Software Development",
+          "Data Management"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 130,
+      "local": 2
+    }
+  },
+  {
+    "id": "FU-Berlin",
+    "name": "Free University of Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Computational Intelligence",
+          "Software Engineering",
+          "Data Management"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 250,
+      "local": 4
+    }
+  },
+  {
+    "id": "HTW-Berlin",
+    "name": "HTW Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Embedded Systems",
+          "Software Engineering"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 400,
+      "local": 7
+    }
+  },
+  {
+    "id": "Berlin-University-of-the-Arts",
+    "name": "Berlin University of the Arts",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Media Informatics",
+        "language": "English",
+        "specializations": [
+          "Media Computing",
+          "Digital Media",
+          "Creative Programming"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 500,
+      "local": 9
+    }
+  },
+  {
+    "id": "Berlin-Psychology-School",
+    "name": "Berlin Psychology School",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computational Psychology",
+        "language": "English",
+        "specializations": [
+          "Cognitive Computing",
+          "Psychological Data Science"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 600,
+      "local": 12
+    }
+  },
+  {
+    "id": "Alice-Salomon-University",
+    "name": "Alice Salomon University of Applied Sciences",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Applied Computer Science",
+        "language": "English",
+        "specializations": [
+          "Data Science",
+          "Software Engineering"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 700,
+      "local": 10
+    }
+  },
+  {
+    "id": "Beuth-University-of-Applied-Sciences-Berlin",
+    "name": "Beuth University of Applied Sciences Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Software Engineering",
+          "Artificial Intelligence"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 450,
+      "local": 6
+    }
+  },
+  {
+    "id": "ESMT-Berlin",
+    "name": "ESMT Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Management with specialization in Digital Technologies",
+        "language": "English",
+        "specializations": [
+          "Digital Technologies",
+          "Data Science"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 300,
+      "local": 5
+    }
+  },
+  {
+    "id": "SRH-Berlin-University-of-Appied-Sciences",
+    "name": "SRH Berlin University of Applied Sciences",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Computer Science",
+        "language": "English",
+        "specializations": [
+          "Software Development",
+          "Data Science"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 800,
+      "local": 15
+    }
+  },
+  {
+    "id": "Hertie-School",
+    "name": "Hertie School",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Public Policy",
+        "language": "English",
+        "specializations": [
+          "Governance",
+          "Data Science for Public Policy",
+          "International Affairs"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 401,
+      "local": 10
+    }
+  },
+  {
+    "id": "Bard-Berlin",
+    "name": "Bard College Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Bachelor’s in Humanities, the Arts, and Social Thought",
+        "language": "English",
+        "specializations": [
+          "Literature and Rhetoric",
+          "Art and Aesthetics",
+          "Politics and Ethics"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 801,
+      "local": 15
+    }
+  },
+  {
+    "id": "Steinbeis-Berlin",
+    "name": "Steinbeis University Berlin",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "programs": [
+      {
+        "degree": "Master’s in Business Innovation and Entrepreneurship",
+        "language": "English",
+        "specializations": [
+          "Business Innovation",
+          "Entrepreneurship",
+          "Technology Management"
+        ]
+      }
+    ],
+    "ranking": {
+      "global": 600,
+      "local": 12
+    }
+  }
+]
