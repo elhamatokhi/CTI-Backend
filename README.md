@@ -1,20 +1,10 @@
-# Image Upload Project
+# Universities in Berlin Form
 
-This project allows users to upload images, view them in a gallery, and delete them if necessary. It uses **Express.js** for server-side logic and **Multer** for handling file uploads.
+This project consists of a form where users can select different universities in Berlin. The form is designed with buttons representing each university, and once a university is selected, the information about that university will be displayed in a side-by-side layout.
 
-## Multer
+## Features
 
-[Multer](https://www.npmjs.com/package/multer) is a middleware for handling **multipart/form-data**, which is used for uploading files. It simplifies the process of receiving and storing files on the server.
-
-### Why Multer?
-
-I used **Multer** because it efficiently handles file uploads by:
-
-- Parsing incoming form data.
-- Saving uploaded files to the server.
-- Allowing for customization of storage location and file handling.
-
-In this project, Multer is used to upload images and store them in the **uploads** folder, making it easy to display them in the gallery and manage files.
+University Selection: The form contains buttons representing various universities in Berlin. When clicked, the corresponding information is displayed in a separate div.
 
 <!-- GETTING STARTED -->
 
@@ -49,7 +39,7 @@ npm install
 > To run install nodemon and run:
 
 ```bash
-npx nodemon index.js
+nodemon server.js
 ```
 
 ## Authors
