@@ -6,9 +6,11 @@ This project consists of a form where users can select different universities in
 
 University Selection: The form contains buttons representing various universities in Berlin. When clicked, the corresponding information is displayed in a separate div.
 
-<!-- GETTING STARTED -->
+## 🚀 Live Demo
 
-## Getting Started
+👉 [Try the live app here](https://cti-backend-b1ll.onrender.com)
+
+## 🛠 Setup Instructions
 
 To get a local copy up and running follow these simple example steps.
 
