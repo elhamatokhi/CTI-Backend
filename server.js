@@ -1,12 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { readFileSync } from 'fs'
 import _ from 'lodash'
 import router from './routes/index.js'
 const app = express()
 const PORT = 3000
-
-const universitiesJSON = readFileSync('./universities.json', 'utf-8')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))

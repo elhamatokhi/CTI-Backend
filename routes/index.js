@@ -1,53 +1,52 @@
-import { Router } from "express";
-import { readFileSync } from "fs";
-import fs from "fs";
+import { Router } from 'express'
+import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
+import path from 'path'
 
-const router = Router();
-import { fileURLToPath } from "url";
-import path from "path";
+const router = Router()
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-let data;
+let data
 
-router.get("/", (req, res) => {
-  res.render("index.ejs", { uni: data });
-});
+router.get('/', (req, res) => {
+  res.render('index.ejs', { uni: data })
+})
 
-router.post("/uniAction", (req, res) => {
+router.post('/uniAction', (req, res) => {
   const universitiesJSON = readFileSync(
-    path.join(__dirname, "../universities.json"),
-    "utf-8"
-  );
+    path.join(__dirname, '../universities.json'),
+    'utf-8'
+  )
 
-  const universities = JSON.parse(universitiesJSON);
+  const universities = JSON.parse(universitiesJSON)
 
-  data = universities.find((u) => u.name === req.body.choice) || null;
+  data = universities.find(u => u.name === req.body.choice) || null
 
-  console.log("Selected university:", req.body.choice);
-  console.log("Matched data:", data);
+  console.log('Selected university:', req.body.choice)
+  console.log('Matched data:', data)
 
-  res.redirect("/");
-});
+  res.redirect('/')
+})
 
-router.get("/download/:id", (req, res) => {
+router.get('/download/:id', (req, res) => {
   const universitiesJSON = readFileSync(
-    path.join(__dirname, "../universities.json"),
-    "utf-8"
-  );
+    path.join(__dirname, '../universities.json'),
+    'utf-8'
+  )
 
-  const universities = JSON.parse(universitiesJSON);
+  const universities = JSON.parse(universitiesJSON)
 
-  const idParam = req.params.id.trim().toLowerCase();
+  const idParam = req.params.id.trim().toLowerCase()
   const uni = universities.find(
-    (c) => String(c.id).toLowerCase() === String(req.params.id).toLowerCase()
-  );
+    c => String(c.id).toLowerCase() === String(req.params.id).toLowerCase()
+  )
   if (!uni) {
-    return res.status(404).send("University not found");
+    return res.status(404).send('University not found')
   }
 
-  res.attachment(`${uni.name}.json`);
-  res.send(JSON.stringify(uni, null, 2));
-});
-export default router;
+  res.attachment(`${uni.name}.json`)
+  res.send(JSON.stringify(uni, null, 2))
+})
+export default router
