@@ -24,9 +24,6 @@ router.post('/uniAction', (req, res) => {
 
   data = universities.find(u => u.name === req.body.choice) || null
 
-  console.log('Selected university:', req.body.choice)
-  console.log('Matched data:', data)
-
   res.redirect('/')
 })
 
