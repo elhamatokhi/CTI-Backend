@@ -10,5 +10,9 @@
   {
     "username": "Elhama",
     "password": "123"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVsaGFtYSIsInBhc3N3b3JkIjoiMTIzIiwiaWF0IjoxNzQ4NTM2MTEwLCJleHAiOjE3NDg1NTQxMTB9.83EMKZ6Run2SgTfX2_0dlj3l0S48wOXAcqlD76PJsLg",
+    "generatedAt": "2025-05-29T16:28:30.027Z"
   }
 ]

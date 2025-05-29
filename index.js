@@ -6,6 +6,9 @@ import { readFileSync } from 'fs'
 import path from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
+import jwt from 'jsonwebtoken'
+const JWT_SECRET =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3NDg1MzU3OTEsImV4cCI6MTc4MDA3MTc5MSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.iCtRdy875PZV9ijll1ImI7wqJ3EBCf-8EBOykCrR4Ak'
 
 const app = express()
 const PORT = 3005
@@ -88,9 +91,8 @@ const apiKeyauth = (req, res, next) => {
     return res.status(401).json({ message: 'Unauthorized: Invalid API Key' })
   }
   next()
-}
 
-// Routes
+  // Routes
 
 // Reads/gets data from simpleData.json
 app.get('/getData', allRateLimit, getDataHandler)
@@ -100,6 +102,9 @@ app.get('/getDataWithAuth', auth, getDataHandler)
 
 // Get data using api key
 app.get('/getDataWithAPIKEY', apiKeyauth, getDataHandler)
+
+// Get data using token
+app.get('/getDataWithToken', tokenAuth, getDataHandler)
 
 // Creates username and password
 app.post('/registerUser', (req, res) => {
@@ -129,6 +134,31 @@ app.post('/generateApiKey', (req, res) => {
   // Save the key to the database(here apiKey.json)
   fs.writeFileSync('apiKey.json', JSON.stringify(apiKeyData, null, 2))
   res.status(201).json({ apiKey, message: 'API key generated sucessfully' })
+})
+// Generate a token
+app.post('/generate-token', (req, res) => {
+  const { username, password } = req.body
+  if (!username || !password) {
+    return res.status(400).json({
+      message: 'Username and password required!'
+    })
+  }
+
+  const user = users.find(
+    user => user.username === username && user.password === password
+  )
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid username and password' })
+  }
+
+  const token = jwt.sign(
+    { username: user.username, password: user.password },
+    JWT_SECRET,
+    { expiresIn: '5h' }
+  )
+  users.push({ token, generatedAt: new Date().toISOString() })
+  writeUsersToFile(users)
+  res.json({ token })
 })
 
 app.listen(PORT, () => {
