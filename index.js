@@ -2,10 +2,10 @@ import express from 'express'
 import rateLimit from 'express-rate-limit'
 import basicAuth from 'express-basic-auth'
 import { fileURLToPath } from 'url'
-import { readFileSync, stat } from 'fs'
+import { read, readFileSync, stat } from 'fs'
 import path, { resolve } from 'path'
 import fs from 'fs'
-import { get } from 'http'
+import crypto from 'crypto'
 
 const app = express()
 const PORT = 3005
@@ -31,8 +31,8 @@ if (fs.existsSync(usersFilePath)) {
     console.log('Error reading or parsing users data.')
   }
 }
-// Write users to users.json
 
+// Write users to users.json
 function writeUsersToFile (users) {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2))
 }
@@ -68,11 +68,13 @@ const auth = basicAuth({
 })
 
 // Routes
+
 // Reads/gets data from simpleData.json
 app.get('/getData', allRateLimit, getDataHandler)
 
 // Get data using (auth)
 app.get('/getDataWithAuth', auth, getDataHandler)
+
 // Creates username and password
 app.post('/registerUser', (req, res) => {
   const { username, password } = req.body
@@ -86,6 +88,22 @@ app.post('/registerUser', (req, res) => {
   users.push({ username, password })
   writeUsersToFile(users)
   return res.status(200).json({ message: 'User registered successfully! 🎉 ' })
+})
+
+// Genereate api-key
+app.post('/generateApiKey', (req, res) => {
+  const apiKey = crypto.randomBytes(32).toString('hex') // Generate an api key -  completely free on how to generate
+
+  let apiKeys = []
+  const apiKeyData = {
+    key: apiKey,
+    generatedAt: new Date().toISOString()
+  }
+
+  apiKeys.push(apiKeyData)
+  // Save the key to the database(here apiKey.json)
+  fs.writeFileSync('apiKey.json', JSON.stringify(apiKeyData, null, 2))
+  res.status(201).json({ apiKey, message: 'API key generated sucessfully' })
 })
 
 app.listen(PORT, () => {
