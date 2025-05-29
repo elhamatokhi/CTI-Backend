@@ -32,8 +32,12 @@ const getDataHandler = (req, res) => {
 
   res.json(responseData)
 }
-
-app.get('/getData', getDataHandler)
+const allRateLimit = rateLimit({
+  windowMs: 60 * 1000,
+  max: 1,
+  message: 'Too many requests from this IP, please try again later.'
+})
+app.get('/getData', allRateLimit, getDataHandler)
 
 app.listen(PORT, () => {
   console.log(`Server is listenin on port ${PORT}`)
