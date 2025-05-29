@@ -31,7 +31,7 @@ Install dependencies:
 ```
 bash
 
-npm install express express-basic-auth
+npm install
 
 ```
 
