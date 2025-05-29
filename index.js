@@ -2,8 +2,8 @@ import express from 'express'
 import rateLimit from 'express-rate-limit'
 import basicAuth from 'express-basic-auth'
 import { fileURLToPath } from 'url'
-import { read, readFileSync, stat } from 'fs'
-import path, { resolve } from 'path'
+import { readFileSync } from 'fs'
+import path from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
 
@@ -15,6 +15,7 @@ app.use(express.json())
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const apiKeysFilePath = path.join(__dirname, 'apiKey.json')
 
 const jsonData = JSON.parse(
   readFileSync(path.join(__dirname, 'simpleData.json'), 'utf-8') // readFileSync returns a string, so you need to parse it
@@ -23,6 +24,7 @@ const jsonData = JSON.parse(
 // Read users from users.json
 const usersFilePath = 'users.json'
 let users = []
+
 if (fs.existsSync(usersFilePath)) {
   try {
     const userData = fs.readFileSync(usersFilePath, 'utf-8')
@@ -67,6 +69,27 @@ const auth = basicAuth({
   challenge: true
 })
 
+/**
+ * Middleware to authenticate requests using an API key.
+ *
+ * Reads the stored API key from the JSON file - apiKey.json and compares it with the
+ * 'api-key' header provided in the request. If the key is missing or
+ * invalid, responds with 401 Unauthorized and stops further processing.
+ * If valid, allows the request to proceed by calling next().
+ */
+
+const apiKeyauth = (req, res, next) => {
+  const apiKeyFileContent = fs.readFileSync(apiKeysFilePath, 'utf-8') // read as string
+  const apiKeyData = JSON.parse(apiKeyFileContent) // parse to JSON
+
+  const apiKey = req.headers['api-key']
+
+  if (!apiKey || apiKey !== apiKeyData.key) {
+    return res.status(401).json({ message: 'Unauthorized: Invalid API Key' })
+  }
+  next()
+}
+
 // Routes
 
 // Reads/gets data from simpleData.json
@@ -74,6 +97,9 @@ app.get('/getData', allRateLimit, getDataHandler)
 
 // Get data using (auth)
 app.get('/getDataWithAuth', auth, getDataHandler)
+
+// Get data using api key
+app.get('/getDataWithAPIKEY', apiKeyauth, getDataHandler)
 
 // Creates username and password
 app.post('/registerUser', (req, res) => {
@@ -94,12 +120,11 @@ app.post('/registerUser', (req, res) => {
 app.post('/generateApiKey', (req, res) => {
   const apiKey = crypto.randomBytes(32).toString('hex') // Generate an api key -  completely free on how to generate
 
-  let apiKeys = []
   const apiKeyData = {
     key: apiKey,
     generatedAt: new Date().toISOString()
   }
-
+  let apiKeys = []
   apiKeys.push(apiKeyData)
   // Save the key to the database(here apiKey.json)
   fs.writeFileSync('apiKey.json', JSON.stringify(apiKeyData, null, 2))
