@@ -91,8 +91,30 @@ const apiKeyauth = (req, res, next) => {
     return res.status(401).json({ message: 'Unauthorized: Invalid API Key' })
   }
   next()
+}
 
-  // Routes
+const tokenAuth = (req, res, next) => {
+  const authorizationToken = req.headers.authorization
+  if (!authorizationToken) {
+    return res.status(401).json({ message: 'Token not provided' })
+  }
+
+  const [bearer, token] = authorizationToken.split(' ')
+
+  if (bearer != 'Bearer' || !token) {
+    return res.status('401').json({ message: 'Invalid authorization header' })
+  }
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.log('JWT verification error', err)
+      return res.status(400).json({ message: err.message })
+    }
+    req.user = decoded
+    next()
+  })
+}
+
+// Routes
 
 // Reads/gets data from simpleData.json
 app.get('/getData', allRateLimit, getDataHandler)
