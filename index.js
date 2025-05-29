@@ -1,10 +1,11 @@
 import express from 'express'
 import rateLimit from 'express-rate-limit'
-import expressBasicAuth from 'express-basic-auth'
+import basicAuth from 'express-basic-auth'
 import { fileURLToPath } from 'url'
 import { readFileSync, stat } from 'fs'
 import path, { resolve } from 'path'
 import fs from 'fs'
+import { get } from 'http'
 
 const app = express()
 const PORT = 3005
@@ -35,7 +36,7 @@ if (fs.existsSync(usersFilePath)) {
 function writeUsersToFile (users) {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2))
 }
-// Helper function => gets data from the user as query parameter
+// Helper function / middleware => gets data from the user as query parameter
 const getDataHandler = (req, res) => {
   const { page } = req.query
   const pageNumber = parseInt(page) || 1
@@ -54,10 +55,24 @@ const allRateLimit = rateLimit({
   message: 'Too many requests from this IP, please try again later.'
 })
 
+// Set up basic HTTP authentication middleware
+const auth = basicAuth({
+  // Create an object of users from an array, where each key is a username and its value is the password
+  users: users.reduce((acc, user) => {
+    acc[user.username] = user.password // Add username-password pair to the accumulator object
+    return acc // Return the updated accumulator for the next iteration
+  }, {}), // Start with an empty object
+
+  // If authentication fails, browser will prompt for login instead of silently rejecting
+  challenge: true
+})
+
 // Routes
-// Reads data from simpleData.json
+// Reads/gets data from simpleData.json
 app.get('/getData', allRateLimit, getDataHandler)
 
+// Get data using (auth)
+app.get('/getDataWithAuth', auth, getDataHandler)
 // Creates username and password
 app.post('/registerUser', (req, res) => {
   const { username, password } = req.body
